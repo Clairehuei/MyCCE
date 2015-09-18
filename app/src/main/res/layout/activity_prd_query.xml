@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LinearLayout">
+
+    <TextView
+        style="@style/TextView.LoginText"
+        android:text="@string/account" />
+
+    <EditText
+        android:id="@+id/edit_account"
+        style="@style/EditText.Account"
+        tools:text="Normal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查詢"
+        android:id="@+id/queryButton01" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:id="@+id/queryButtonX01" />
+
+
+</LinearLayout>

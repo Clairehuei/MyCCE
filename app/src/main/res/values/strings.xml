@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">NETWIN</string>
+    <string name="account">品名</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="loadingMessage">資料讀取中，請稍後．．．</string>
+    <string name="title_activity_activity__prd__query__result">產品查詢結果</string>
+    <string name="title_activity_activity__prd__detail">商品明細</string>
+    <string name="product_name">商品品名：</string>
+    <string name="product_origin">产地：</string>
+    <string name="title_activity_activity__prd__query">商品查詢</string>
+
+
+    <string name="classify">CCE</string>
+    <string name="bingo">賓果</string>
+    <string name="bigFuTry">大福彩</string>
+    <string name="wayLiTry">威力彩</string>
+    <string name="threeEightTry">38樂合彩</string>
+    <string name="bigLuckToa">大樂透</string>
+    <string name="fourNineTry">49樂合彩</string>
+    <string name="threeNineTry">39樂合彩</string>
+    <string name="fiveThreeNine">今彩539</string>
+    <string name="threeStarTry">3星彩</string>
+    <string name="fourStarTry">4星彩</string>
+    <string name="sixTry">六合彩</string>
+    <string name="title_activity_activity__bingo">賓果</string>
+</resources>

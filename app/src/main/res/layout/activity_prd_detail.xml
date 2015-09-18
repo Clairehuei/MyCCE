@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/LinearLayout">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+
+    <android.support.v7.widget.GridLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:columnCount="2"
+        app:rowCount="2">
+
+        <TextView
+            style="@style/TextView.DetailTitle"
+            android:text="@string/product_name" />
+
+        <TextView
+            android:id="@+id/product_name"
+            style="@style/TextView.DetailValue" />
+
+        <TextView
+            style="@style/TextView.DetailTitle"
+            android:text="@string/product_origin" />
+
+        <TextView
+            android:id="@+id/product_origin"
+            style="@style/TextView.DetailValue" />
+
+    </android.support.v7.widget.GridLayout>
+
+
+
+    </ScrollView>
+
+
+
+</LinearLayout>

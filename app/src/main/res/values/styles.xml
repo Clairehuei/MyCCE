@@ -1,0 +1,92 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="LinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextView.LoginText">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:layout_width">216dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="EditText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:background">@drawable/login_edit</item>
+        <item name="android:paddingLeft">16dp</item>
+    </style>
+
+    <style name="EditText.Account">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">208dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+
+    <style name="CollectUnitTextStyle">
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:textColor">@color/unit_text_color</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="TextView.DetailTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:layout_width">112dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="TextView.DetailValue">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:layout_width">208dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TextView.BingoA">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="MainButton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+</resources>

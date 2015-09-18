@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.codekitchen.allen.mycce" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="15" />
+
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.ACCESS_WIFI_STATE"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.RECEIVE_SMS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.READ_SMS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.RECORD_AUDIO"
+        android:maxSdkVersion="22" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity_Prd_Query_Result"
+            android:label="@string/title_activity_activity__prd__query__result" >
+        </activity>
+        <activity
+            android:name=".Activity_Prd_Detail"
+            android:label="@string/title_activity_activity__prd__detail" >
+        </activity>
+        <activity
+            android:name=".Activity_Prd_Query"
+            android:label="@string/title_activity_activity__prd__query" >
+        </activity>
+        <activity
+            android:name=".Activity_Bingo"
+            android:label="@string/title_activity_activity__bingo" >
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/spacer_24dp"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:alignmentMode="alignBounds"
+        app:columnCount="3"
+        app:columnOrderPreserved="true"
+        app:orientation="horizontal"
+        app:rowCount="3">
+
+        <Button
+            android:id="@+id/classify"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_category_search_selector"
+            android:text="@string/classify"
+            app:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/bingo"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            android:text="@string/bingo"
+            app:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/bigFuTry"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            app:layout_gravity="center"
+            android:text="@string/bigFuTry" />
+
+        <Button
+            android:id="@+id/wayLiTry"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            app:layout_gravity="center"
+            tools:text="@string/wayLiTry" />
+
+        <Button
+            android:id="@+id/threeEightTry"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            app:layout_gravity="center"
+            tools:text="@string/threeEightTry" />
+
+        <Button
+            android:id="@+id/bigLuckToa"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            app:layout_gravity="center"
+            tools:text="@string/bigLuckToa" />
+
+        <Button
+            android:id="@+id/fourNineTry"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            tools:text="@string/fourNineTry"
+            app:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/threeNineTry"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            tools:text="@string/threeNineTry"
+            app:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/fiveThreeNine"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            tools:text="@string/fiveThreeNine"
+            app:layout_gravity="center" />
+
+        <Space />
+
+        <Button
+            android:id="@+id/threeStarTry"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            tools:text="@string/threeStarTry"
+            app:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/fourStarTry"
+            style="@style/MainButton"
+            android:drawableTop="@drawable/btn_ball_fire"
+            tools:text="@string/fourStarTry"
+            app:layout_gravity="center" />
+
+
+    </android.support.v7.widget.GridLayout>
+
+</LinearLayout>
