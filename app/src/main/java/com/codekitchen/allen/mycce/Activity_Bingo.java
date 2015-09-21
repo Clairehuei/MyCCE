@@ -2,6 +2,7 @@ package com.codekitchen.allen.mycce;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,6 @@ import com.codekitchen.allen.mycce.api.DaggerApiComponent;
 import com.codekitchen.allen.mycce.api.model.BingoDetail;
 import com.codekitchen.allen.mycce.api.response.ApiModule;
 import com.codekitchen.allen.mycce.api.response.BingoListingResponse;
-import com.codekitchen.allen.mycce.api.response.ProductDetailResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +75,54 @@ public class Activity_Bingo extends AppCompatActivity {
     @InjectView(R.id.bingoARNO20)
     TextView bingoARNO20;
 
+    @InjectView(R.id.bingoBRNO01)
+    TextView bingoBRNO01;
+    @InjectView(R.id.bingoBRNO02)
+    TextView bingoBRNO02;
+    @InjectView(R.id.bingoBRNO03)
+    TextView bingoBRNO03;
+    @InjectView(R.id.bingoBRNO04)
+    TextView bingoBRNO04;
+    @InjectView(R.id.bingoBRNO05)
+    TextView bingoBRNO05;
+    @InjectView(R.id.bingoBRNO06)
+    TextView bingoBRNO06;
+    @InjectView(R.id.bingoBRNO07)
+    TextView bingoBRNO07;
+    @InjectView(R.id.bingoBRNO08)
+    TextView bingoBRNO08;
+    @InjectView(R.id.bingoBRNO09)
+    TextView bingoBRNO09;
+    @InjectView(R.id.bingoBRNO10)
+    TextView bingoBRNO10;
 
-    List<BingoDetail> items = new ArrayList<>();
+    @InjectView(R.id.bingoCRNO01)
+    TextView bingoCRNO01;
+    @InjectView(R.id.bingoCRNO02)
+    TextView bingoCRNO02;
+    @InjectView(R.id.bingoCRNO03)
+    TextView bingoCRNO03;
+    @InjectView(R.id.bingoCRNO04)
+    TextView bingoCRNO04;
+    @InjectView(R.id.bingoCRNO05)
+    TextView bingoCRNO05;
+    @InjectView(R.id.bingoCRNO06)
+    TextView bingoCRNO06;
+    @InjectView(R.id.bingoCRNO07)
+    TextView bingoCRNO07;
+    @InjectView(R.id.bingoCRNO08)
+    TextView bingoCRNO08;
+    @InjectView(R.id.bingoCRNO09)
+    TextView bingoCRNO09;
+    @InjectView(R.id.bingoCRNO10)
+    TextView bingoCRNO10;
+
+
+
+    List<BingoDetail> itemsA = new ArrayList<>();
+    List<BingoDetail> itemsB = new ArrayList<>();
+    List<BingoDetail> itemsC = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +139,6 @@ public class Activity_Bingo extends AppCompatActivity {
         apiComponent.inject(this);
         Log.d("==[Ac_Bingo]==", "===onCreate(end)===");
     }
-
 
     @Override
     protected void onResume() {
@@ -150,10 +195,13 @@ public class Activity_Bingo extends AppCompatActivity {
                     @Override
                     public void onNext(BingoListingResponse response) {
                         Log.d("loadData", "===onNext===");
-                        items = response.getResultAList();
-//                        productDetail = response.getDataResult().getProductDetail();
+                        itemsA = response.getResultAList();
+                        itemsB = response.getResultBList();
+                        itemsC = response.getResultCList();
                         runOnUiThread(() -> {
-                            setDetail();
+                            setResultA();
+                            setResultB();
+                            setResultC();
                         });
                     }
                 });
@@ -161,10 +209,10 @@ public class Activity_Bingo extends AppCompatActivity {
         Log.d("==[Ac_Bingo]==", "===loadData(end)===");
     }
 
-    private void setDetail() {
-        Log.d("==[Ac_Bingo]==", "===setDetail===");
+    private void setResultA() {
+        Log.d("==[Ac_Bingo]==", "===setResultA===");
         String temp = "bingoARNO";
-        for(int i=0;i<items.size(); i++){
+        for(int i=0;i<itemsA.size(); i++){
 
             if(i<9){
                 temp = temp + "0" + (i+1);
@@ -172,53 +220,145 @@ public class Activity_Bingo extends AppCompatActivity {
                 temp = temp + (i+1);
             }
 
+            if(i==0){
+                bingoARNO01.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO01, itemsA.get(i).getISC());
+            }else if(i==1){
+                bingoARNO02.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO02, itemsA.get(i).getISC());
+            }else if(i==2){
+                bingoARNO03.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO03, itemsA.get(i).getISC());
+            }else if(i==3){
+                bingoARNO04.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO04, itemsA.get(i).getISC());
+            }else if(i==4){
+                bingoARNO05.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO05, itemsA.get(i).getISC());
+            }else if(i==5){
+                bingoARNO06.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO06, itemsA.get(i).getISC());
+            }else if(i==6){
+                bingoARNO07.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO07, itemsA.get(i).getISC());
+            }else if(i==7){
+                bingoARNO08.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO08, itemsA.get(i).getISC());
+            }else if(i==8){
+                bingoARNO09.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO09, itemsA.get(i).getISC());
+            }else if(i==9){
+                bingoARNO10.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO10, itemsA.get(i).getISC());
+            }else if(i==10){
+                bingoARNO11.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO11, itemsA.get(i).getISC());
+            }else if(i==11){
+                bingoARNO12.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO12, itemsA.get(i).getISC());
+            }else if(i==12){
+                bingoARNO13.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO13, itemsA.get(i).getISC());
+            }else if(i==13){
+                bingoARNO14.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO14, itemsA.get(i).getISC());
+            }else if(i==14){
+                bingoARNO15.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO15, itemsA.get(i).getISC());
+            }else if(i==15){
+                bingoARNO16.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO16, itemsA.get(i).getISC());
+            }else if(i==16){
+                bingoARNO17.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO17, itemsA.get(i).getISC());
+            }else if(i==17){
+                bingoARNO18.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO18, itemsA.get(i).getISC());
+            }else if(i==18){
+                bingoARNO19.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO19, itemsA.get(i).getISC());
+            }else if(i==19){
+                bingoARNO20.setText(itemsA.get(i).getNO());
+                setHighLight(bingoARNO20, itemsA.get(i).getISC());
+            }
+        }
+    }
+
+
+    private void setResultB() {
+        Log.d("==[Ac_Bingo]==", "===setResultB===");
+        String temp = "bingoBRNO";
+        for(int i=0;i<itemsB.size(); i++){
+
+            if(i<9){
+                temp = temp + "0" + (i+1);
+            }else{
+                temp = temp + (i+1);
+            }
 
             if(i==0){
-                Log.d("==[Ac_Bingo]==", "i=0 =>"+items.get(i).getNO());
-                bingoARNO01.setText(items.get(i).getNO());
+                bingoBRNO01.setText(itemsB.get(i).getNO());
             }else if(i==1){
-                Log.d("==[Ac_Bingo]==", "i=1 =>"+items.get(i).getNO());
-                bingoARNO02.setText(items.get(i).getNO());
+                bingoBRNO02.setText(itemsB.get(i).getNO());
             }else if(i==2){
-                Log.d("==[Ac_Bingo]==", "i=2 =>"+items.get(i).getNO());
-                bingoARNO03.setText(items.get(i).getNO());
+                bingoBRNO03.setText(itemsB.get(i).getNO());
             }else if(i==3){
-                Log.d("==[Ac_Bingo]==", "i=3 =>"+items.get(i).getNO());
-                bingoARNO04.setText(items.get(i).getNO());
+                bingoBRNO04.setText(itemsB.get(i).getNO());
             }else if(i==4){
-                Log.d("==[Ac_Bingo]==", "i=4 =>"+items.get(i).getNO());
-                bingoARNO05.setText(items.get(i).getNO());
+                bingoBRNO05.setText(itemsB.get(i).getNO());
             }else if(i==5){
-                bingoARNO06.setText(items.get(i).getNO());
+                bingoBRNO06.setText(itemsB.get(i).getNO());
             }else if(i==6){
-                bingoARNO07.setText(items.get(i).getNO());
+                bingoBRNO07.setText(itemsB.get(i).getNO());
             }else if(i==7){
-                bingoARNO08.setText(items.get(i).getNO());
+                bingoBRNO08.setText(itemsB.get(i).getNO());
             }else if(i==8){
-                bingoARNO09.setText(items.get(i).getNO());
+                bingoBRNO09.setText(itemsB.get(i).getNO());
             }else if(i==9){
-                bingoARNO10.setText(items.get(i).getNO());
-            }else if(i==10){
-                bingoARNO11.setText(items.get(i).getNO());
-            }else if(i==11){
-                bingoARNO12.setText(items.get(i).getNO());
-            }else if(i==12){
-                bingoARNO13.setText(items.get(i).getNO());
-            }else if(i==13){
-                bingoARNO14.setText(items.get(i).getNO());
-            }else if(i==14){
-                bingoARNO15.setText(items.get(i).getNO());
-            }else if(i==15){
-                bingoARNO16.setText(items.get(i).getNO());
-            }else if(i==16){
-                bingoARNO17.setText(items.get(i).getNO());
-            }else if(i==17){
-                bingoARNO18.setText(items.get(i).getNO());
-            }else if(i==18){
-                bingoARNO19.setText(items.get(i).getNO());
-            }else if(i==19){
-                bingoARNO20.setText(items.get(i).getNO());
+                bingoBRNO10.setText(itemsB.get(i).getNO());
             }
+        }
+    }
+
+
+    private void setResultC() {
+        Log.d("==[Ac_Bingo]==", "===setResultC===");
+        String temp = "bingoCRNO";
+        for(int i=0;i<itemsC.size(); i++){
+
+            if(i<9){
+                temp = temp + "0" + (i+1);
+            }else{
+                temp = temp + (i+1);
+            }
+
+            if(i==0){
+                bingoCRNO01.setText(itemsC.get(i).getNO());
+            }else if(i==1){
+                bingoCRNO02.setText(itemsC.get(i).getNO());
+            }else if(i==2){
+                bingoCRNO03.setText(itemsC.get(i).getNO());
+            }else if(i==3){
+                bingoCRNO04.setText(itemsC.get(i).getNO());
+            }else if(i==4){
+                bingoCRNO05.setText(itemsC.get(i).getNO());
+            }else if(i==5){
+                bingoCRNO06.setText(itemsC.get(i).getNO());
+            }else if(i==6){
+                bingoCRNO07.setText(itemsC.get(i).getNO());
+            }else if(i==7){
+                bingoCRNO08.setText(itemsC.get(i).getNO());
+            }else if(i==8){
+                bingoCRNO09.setText(itemsC.get(i).getNO());
+            }else if(i==9){
+                bingoCRNO10.setText(itemsC.get(i).getNO());
+            }
+        }
+    }
+
+    void setHighLight(TextView t, int isc){
+        if(isc==3){
+            t.setTextColor(Color.RED);
         }
     }
 

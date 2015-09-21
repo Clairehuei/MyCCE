@@ -5,4 +5,7 @@
     <color name="primary_text_color">#333333</color>
     <color name="unit_text_color">#1B7E5A</color>
     <color name="gray">#333333</color>
+    <color name="light_adobe">#FFEECA</color>
+    <color name="aquamarine">#7FFFD4</color>
+    <color name="darkolivegreen1">#CAFF70</color>
 </resources>

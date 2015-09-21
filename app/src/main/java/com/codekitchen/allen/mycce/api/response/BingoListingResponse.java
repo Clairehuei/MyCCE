@@ -13,8 +13,22 @@ public class BingoListingResponse {
     @SerializedName("resultA")
     List<BingoDetail> resultAList;
 
+    @SerializedName("resultB")
+    List<BingoDetail> resultBList;
+
+    @SerializedName("resultC")
+    List<BingoDetail> resultCList;
+
 
     public List<BingoDetail> getResultAList() {
         return resultAList;
+    }
+
+    public List<BingoDetail> getResultBList() {
+        return resultBList;
+    }
+
+    public List<BingoDetail> getResultCList() {
+        return resultCList;
     }
 }

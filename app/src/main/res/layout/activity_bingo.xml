@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/LinearLayout">
-
-
+    style="@style/LinearLayout"
+    android:padding="20dp">
 
     <android.support.v7.widget.GridLayout
         android:layout_width="wrap_content"
@@ -17,109 +16,234 @@
 
         <TextView
             android:id="@+id/bingoARNO01"
-            style="@style/TextView.BingoA"
-             />
+            tools:text="01"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO02"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="02"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO03"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="03"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO04"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="04"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO05"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="05"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO06"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="06"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO07"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="07"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO08"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="08"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO09"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="09"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO10"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="10"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO11"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="11"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO12"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="12"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO13"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="13"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO14"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="14"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO15"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="15"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO16"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="16"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO17"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="17"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO18"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="18"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO19"
-            style="@style/TextView.BingoA"
-            />
+            tools:text="19"
+            style="@style/BingoBall.CircleA" />
 
         <TextView
             android:id="@+id/bingoARNO20"
-            style="@style/TextView.BingoA"
-            />
-
-
+            tools:text="20"
+            style="@style/BingoBall.CircleA" />
 
 
     </android.support.v7.widget.GridLayout>
 
+
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:columnCount="10"
+        app:orientation="horizontal"
+        app:columnOrderPreserved="true"
+        app:alignmentMode="alignBounds"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/bingoBRNO01"
+            tools:text="01"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO02"
+            tools:text="02"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO03"
+            tools:text="03"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO04"
+            tools:text="04"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO05"
+            tools:text="05"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO06"
+            tools:text="06"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO07"
+            tools:text="07"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO08"
+            tools:text="08"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO09"
+            tools:text="09"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoBRNO10"
+            tools:text="10"
+            style="@style/BingoBall.CircleA" />
+
+    </android.support.v7.widget.GridLayout>
+
+
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:columnCount="10"
+        app:orientation="horizontal"
+        app:columnOrderPreserved="true"
+        app:alignmentMode="alignBounds"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/bingoCRNO01"
+            tools:text="01"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO02"
+            tools:text="02"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO03"
+            tools:text="03"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO04"
+            tools:text="04"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO05"
+            tools:text="05"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO06"
+            tools:text="06"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO07"
+            tools:text="07"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO08"
+            tools:text="08"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO09"
+            tools:text="09"
+            style="@style/BingoBall.CircleA" />
+
+        <TextView
+            android:id="@+id/bingoCRNO10"
+            tools:text="10"
+            style="@style/BingoBall.CircleA" />
+
+    </android.support.v7.widget.GridLayout>
 
 
 </LinearLayout>
