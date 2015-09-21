@@ -11,10 +11,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AbsListView;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class Activity_BigFuTry extends AppCompatActivity {
 
 
-    private SwipeRefreshLayout laySwipe;
+    @InjectView(R.id.laySwipe)
+    SwipeRefreshLayout laySwipe;
+
+    @InjectView(R.id.lstData)
+    ListView lstData;
+
+    ArrayAdapter<String> adapter;
 
 
     @Override
@@ -22,23 +31,24 @@ public class Activity_BigFuTry extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__big_fu_try);
 
+        ButterKnife.inject(this);
+
         initView();
     }
 
 
     private void initView() {
-        laySwipe = (SwipeRefreshLayout) findViewById(R.id.laySwipe);
         laySwipe.setOnRefreshListener(onSwipeToRefresh);
 
-        //更新時顯示的動態顏色
+        //更新時顯示的動態顏色(如果沒有指定顏色，預色會是以黑色顯示。可以同時指定 4 種顏色，更新橫條會自動以動畫顯示)
         laySwipe.setColorSchemeResources(
-                android.R.color.holo_red_light,
+                android.R.color.holo_red_light,//預設第一個是隨使用者手勢載入的顏色進度條
                 android.R.color.holo_blue_light,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light);
 
-        ListView lstData = (ListView) findViewById(R.id.lstData);
-        lstData.setAdapter(getAdapter());
+        adapter = getAdapter();
+        lstData.setAdapter(adapter);
         lstData.setOnScrollListener(onListScroll);
     }
 
@@ -52,11 +62,17 @@ public class Activity_BigFuTry extends AppCompatActivity {
             laySwipe.setRefreshing(true);//讓使用者看到現在要開始更新的動作
 
 
-            //使用 Handler() 來模擬更新，時間為 3 秒
+            //for demo : 使用 Handler() 來模擬更新，時間為 3 秒
             new Handler().postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
+
+                    //更新資料
+                    adapter = getAdapter();
+                    lstData.setAdapter(adapter);
+                    runOnUiThread(adapter::notifyDataSetChanged);
+
                     laySwipe.setRefreshing(false);//把動畫結束掉
                     Toast.makeText(getApplicationContext(), "Refresh done!", Toast.LENGTH_SHORT).show();
                 }
@@ -75,6 +91,7 @@ public class Activity_BigFuTry extends AppCompatActivity {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , data);
+
         return adapter;
     }
 
