@@ -73,6 +73,10 @@
             android:name=".Activity_Bingo"
             android:label="@string/title_activity_activity__bingo" >
         </activity>
+        <activity
+            android:name=".Activity_BigFuTry"
+            android:label="@string/title_activity_activity__big_fu_try" >
+        </activity>
     </application>
 
 </manifest>

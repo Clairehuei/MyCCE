@@ -32,5 +32,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.bigFuTry)
+    void bigFuTryClick(){
+        Intent intent = new Intent(this, Activity_BigFuTry.class);
+        startActivity(intent);
+    }
+
+
 
 }
