@@ -1,9 +1,11 @@
 package com.codekitchen.allen.mycce;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -17,6 +19,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.inject(this);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        Log.d("=onCreateOptionsMenu=","xxxxx");
+        getMenuInflater().inflate(R.menu.main_bar, menu);
+        return true;
     }
 
     @OnClick(R.id.classify)

@@ -1,11 +1,15 @@
 package com.codekitchen.allen.mycce;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.codekitchen.allen.mycce.api.ApiComponent;
@@ -138,7 +142,42 @@ public class Activity_Bingo extends AppCompatActivity {
                 .build();
         apiComponent.inject(this);
         Log.d("==[Ac_Bingo]==", "===onCreate(end)===");
+
+
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
     }
+
+
+    //設定初始Action Bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        Log.d("=onCreateOptionsMenu=", "bingo");
+        getMenuInflater().inflate(R.menu.main_bar, menu);
+        return true;
+    }
+
+
+    //設定Action Bar要觸發的method
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_reflash:
+                refreshData();
+                return true;
+            case R.id.action_settings:
+                return true;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);//需再AndroidManifest.xml指定當前的 Activity的 "android:parentActivityName" 否則報錯
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     protected void onResume() {
