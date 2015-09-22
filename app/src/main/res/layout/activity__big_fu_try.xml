@@ -17,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:background="#95ea53"
             android:padding="10dp"
-            android:text="Pull to Refresh Demo"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ListView
@@ -25,6 +25,43 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/txtTitle" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="錯誤按鈕"
+            android:id="@+id/buttonxxxx"
+            android:layout_above="@+id/lstData"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正確按鈕1"
+            android:id="@+id/buttonyyyy"
+            android:layout_above="@+id/lstData"
+            android:layout_toRightOf="@+id/buttonxxxx"
+            android:layout_toEndOf="@+id/buttonxxxx" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正確按鈕2"
+            android:id="@+id/buttonzzzz"
+            android:layout_above="@+id/lstData"
+            android:layout_toRightOf="@+id/buttonyyyy"
+            android:layout_toEndOf="@+id/buttonyyyy" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正確按鈕3"
+            android:id="@+id/buttonwwww"
+            android:layout_above="@+id/lstData"
+            android:layout_toRightOf="@+id/buttonzzzz"
+            android:layout_toEndOf="@+id/buttonzzzz" />
+
 
     </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
