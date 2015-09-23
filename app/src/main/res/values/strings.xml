@@ -34,6 +34,7 @@
     <string name="updated_at">上次更新於%1$s前</string>
     <string name="updated_just_now">剛剛更新</string>
     <string name="time_error">時間有問題</string>
+    <string name="title_activity_activity__way_li_try">Activity_WayLiTry</string>
 
 
 </resources>

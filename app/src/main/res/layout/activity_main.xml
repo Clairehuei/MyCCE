@@ -46,7 +46,7 @@
             style="@style/MainButton"
             android:drawableTop="@drawable/btn_ball_fire"
             app:layout_gravity="center"
-            tools:text="@string/wayLiTry" />
+            android:text="實作YouTube" />
 
         <Button
             android:id="@+id/threeEightTry"

@@ -1,6 +1,5 @@
 package com.codekitchen.allen.mycce;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -34,6 +33,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class Activity_Bingo extends AppCompatActivity {
+
 
     @Inject
     Bingo bingo;
@@ -143,7 +143,7 @@ public class Activity_Bingo extends AppCompatActivity {
         apiComponent.inject(this);
         Log.d("==[Ac_Bingo]==", "===onCreate(end)===");
 
-
+        //設定Action Bar返回上一頁按鈕
         if(getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

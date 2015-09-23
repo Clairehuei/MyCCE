@@ -3,8 +3,8 @@
     package="com.codekitchen.allen.mycce" >
 
     <uses-sdk
-        android:minSdkVersion="7"
-        android:targetSdkVersion="15" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="22" />
 
     <uses-permission
         android:name="android.permission.INTERNET"
@@ -50,7 +50,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,11 +72,15 @@
         <activity
             android:name=".Activity_Bingo"
             android:label="@string/title_activity_activity__bingo"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".Activity_BigFuTry"
             android:label="@string/title_activity_activity__big_fu_try" >
+        </activity>
+        <activity
+            android:name=".Activity_WayLiTry"
+            android:label="@string/title_activity_activity__way_li_try" >
         </activity>
     </application>
 

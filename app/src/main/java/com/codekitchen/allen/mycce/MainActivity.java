@@ -1,6 +1,5 @@
 package com.codekitchen.allen.mycce;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        Log.d("=onCreateOptionsMenu=","xxxxx");
+        Log.d("=onCreateOptionsMenu=", "xxxxx");
         getMenuInflater().inflate(R.menu.main_bar, menu);
         return true;
     }
@@ -49,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    @OnClick(R.id.wayLiTry)
+    void wayLiTryClick(){
+        Intent intent = new Intent(this, Activity_WayLiTry.class);
+        startActivity(intent);
+    }
 
 
 }
