@@ -52,4 +52,6 @@ dependencies {
     compile 'com.android.support:gridlayout-v7:22.2.0'
     //需引入 layout才可使用 <android.support.v7.widget.GridLayout>
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'com.parse.bolts:bolts-android:1.+'
+    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
 }

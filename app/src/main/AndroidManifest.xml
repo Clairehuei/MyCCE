@@ -43,7 +43,33 @@
         android:name="android.permission.RECORD_AUDIO"
         android:maxSdkVersion="22" />
 
+    <!--====parse推播(start)====-->
+    <permission
+        android:protectionLevel="signature"
+        android:name="com.codekitchen.allen.mycce.permission.C2D_MESSAGE" />
+    <uses-permission
+        android:name="com.codekitchen.allen.mycce.permission.C2D_MESSAGE" />
+    <uses-permission
+        android:name="android.permission.WAKE_LOCK"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.VIBRATE"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.RECEIVE_BOOT_COMPLETED"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.GET_ACCOUNTS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="com.google.android.c2dm.permission.RECEIVE"
+        android:maxSdkVersion="22" />
+    <!--====parse推播(end)====-->
+
+
+    <!--====下方 android:name=".BingoApplication" 是為了parse初始設定====-->
     <application
+        android:name=".BingoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -82,6 +108,39 @@
             android:name=".Activity_WayLiTry"
             android:label="@string/title_activity_activity__way_li_try" >
         </activity>
+
+
+        <!--====parse推播(start)====-->
+        <service android:name="com.parse.PushService" />
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.codekitchen.allen.mycce" />
+            </intent-filter>
+        </receiver>
+        <!--====parse推播(end)====-->
+
     </application>
 
 </manifest>
