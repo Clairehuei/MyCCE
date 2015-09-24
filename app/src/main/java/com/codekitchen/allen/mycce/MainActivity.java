@@ -1,16 +1,24 @@
 package com.codekitchen.allen.mycce;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+
+import com.codekitchen.allen.mycce.sqlite.db.DBHelper;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private Context context;
+    private DBHelper dbHelper;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.inject(this);
 
+        context = this;
+
+        dbHelper = new DBHelper(context);
+        db = dbHelper.getWritableDatabase();
     }
 
     @Override
