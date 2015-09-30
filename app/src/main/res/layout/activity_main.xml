@@ -53,14 +53,14 @@
             style="@style/MainButton"
             android:drawableTop="@drawable/btn_ball_fire"
             app:layout_gravity="center"
-            tools:text="@string/threeEightTry" />
+            android:text="fragment1" />
 
         <Button
             android:id="@+id/bigLuckToa"
             style="@style/MainButton"
             android:drawableTop="@drawable/btn_ball_fire"
             app:layout_gravity="center"
-            tools:text="@string/bigLuckToa" />
+            android:text="fragment2" />
 
         <Button
             android:id="@+id/fourNineTry"

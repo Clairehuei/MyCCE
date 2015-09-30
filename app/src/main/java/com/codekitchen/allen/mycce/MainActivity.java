@@ -68,4 +68,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.threeEightTry)
+    void threeEightTryClick(){
+        Intent intent = new Intent(this, Activity_fragment1.class);
+        startActivity(intent);
+    }
+
+
 }

@@ -35,6 +35,10 @@
     <string name="updated_just_now">剛剛更新</string>
     <string name="time_error">時間有問題</string>
     <string name="title_activity_activity__way_li_try">Activity_WayLiTry</string>
+    <string name="title_activity_activity_fragment1">Activity_fragment1</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
