@@ -142,6 +142,10 @@
             android:name=".Activity_fragment1"
             android:label="@string/title_activity_activity_fragment1" >
         </activity>
+        <activity
+            android:name=".Activity_fragment2"
+            android:label="@string/title_activity_activity_fragment2" >
+        </activity>
     </application>
 
 </manifest>

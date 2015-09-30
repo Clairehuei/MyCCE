@@ -56,4 +56,12 @@ public class MyFragmentA extends Fragment {
         imageView1.setImageResource(R.drawable.tree);
     }
 
+    // 回呼狀態 : Fragment 從螢幕上消失時
+    // 使用時機 : 用來設定/儲存暫存資料
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
 }

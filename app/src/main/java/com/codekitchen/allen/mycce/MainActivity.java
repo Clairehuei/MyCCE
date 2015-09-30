@@ -75,4 +75,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.bigLuckToa)
+    void bigLuckToaClick(){
+        Intent intent = new Intent(this, Activity_fragment2.class);
+        startActivity(intent);
+    }
+
+
 }
