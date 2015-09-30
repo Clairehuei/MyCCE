@@ -82,4 +82,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.fourNineTry)
+    void fourNineTryClick(){
+        Intent intent = new Intent(this, Activity_Gopher1.class);
+        startActivity(intent);
+    }
+
+
 }

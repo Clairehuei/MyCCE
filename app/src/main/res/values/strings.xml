@@ -40,6 +40,7 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_activity_fragment2">Activity_fragment2</string>
+    <string name="title_activity_activity__gopher1">Activity_Gopher1</string>
 
 
 </resources>
