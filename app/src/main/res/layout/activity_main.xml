@@ -44,7 +44,7 @@
         <Button
             android:id="@+id/wayLiTry"
             style="@style/MainButton"
-            android:drawableTop="@drawable/btn_ball_fire"
+            android:drawableTop="@drawable/youtube"
             app:layout_gravity="center"
             android:text="實作YouTube" />
 
@@ -66,7 +66,7 @@
             android:id="@+id/fourNineTry"
             style="@style/MainButton"
             android:drawableTop="@drawable/btn_ball_fire"
-            android:text="地鼠1"
+            android:text="打地鼠"
             app:layout_gravity="center" />
 
         <Button
