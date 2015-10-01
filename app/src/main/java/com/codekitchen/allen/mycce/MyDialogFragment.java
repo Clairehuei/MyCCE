@@ -17,13 +17,13 @@ public class MyDialogFragment extends DialogFragment {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
 //        dialog.setIcon(R.drawable.bells);
         dialog.setTitle(result);
-        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("再玩一次", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                // dosomething
-//                getActivity().onOptionsItemSelected();
+                Activity_Gopher1 a = (Activity_Gopher1)getActivity();
+                a.startGame();
             }
         });
-        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("不爽玩惹", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // dosomething
             }

@@ -1,5 +1,6 @@
 package com.codekitchen.allen.mycce;
 
+import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -12,9 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class Activity_Gopher1 extends AppCompatActivity {
 
@@ -28,10 +34,14 @@ public class Activity_Gopher1 extends AppCompatActivity {
     private int touchId;
     private int score;
 
+    @InjectView(R.id.btnStartGame)
+    Button btnStartGame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__gopher1);
+        ButterKnife.inject(this);
 
         imageViewList = new ImageView[] {
                 (ImageView) findViewById(R.id.imageView),
@@ -108,7 +118,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
         public boolean onTouch(View v, MotionEvent event) {
             if(play && event.getAction() == MotionEvent.ACTION_DOWN) {
                 if(gopher[g.idx] == R.drawable.mole2 ||
-                        gopher[g.idx] == R.drawable.mole3) {
+                   gopher[g.idx] == R.drawable.mole3) {
                     g.hit = true;
                     soundPool.play(touchId, 1.0F, 1.0F, 0, 0, 1.0F);
                     textView.setText(String.valueOf(++score));
@@ -137,70 +147,76 @@ public class Activity_Gopher1 extends AppCompatActivity {
         touchId = soundPool.load(this, R.raw.touch, 1);
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity__gopher1, menu);
-        return true;
+
+
+    @OnClick(R.id.btnStartGame)
+    void fourNineTryClick(){
+        startGame();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            play = true;
-            score = 0;
-            textView.setText("0");
-            item.setEnabled(false);
-            new CountDownTimer(20*1000, 1000){
-                @Override
-                public void onFinish() {
-                    play = false;
-                    item.setEnabled(true);
-                    setTitle("剩餘時間：0");
 
-                    String s = textView.getText().toString();
-                    int is = Integer.parseInt(s);
-                    String result = "你的分數是" + s;
-                    String comment = "";
-                    if(is<0){
-                        comment = "已無力吐槽...";
-                    }else if(is==0){
-                        comment = "小學生都比你強";
-                    }else if(is>=1 && is<=3){
-                        comment = "嗨~遜咖 A_A(@m)";
-                    }else if(is>=4 && is<=6){
-                        comment = "馬馬虎虎啦";
-                    }else if(is>=7 && is<=9){
-                        comment = "唉唷~不錯喔";
-                    }else if(is>=10 && is<=12){
-                        comment = "豪逆害＼(^o^)／";
-                    }else if(is>=13 && is<=15){
-                        comment = "加藤鷹 是你 @o@?";
-                    }else if(is>16){
-                        comment = "幹你用外掛喔!?";
-                    }
+    public void startGame(){
+        play = true;
+        score = 0;
+        textView.setText("0");
+        //item.setEnabled(false);
+        btnStartGame.setEnabled(false);
+        new CountDownTimer(20*1000, 1000){
+            @Override
+            public void onFinish() {
+                play = false;
+                //item.setEnabled(true);
+                btnStartGame.setEnabled(true);
+                setTitle("剩餘時間：0");
 
-
-                    // 建立 MyDialogFragment
-                    MyDialogFragment dialogfragment = new MyDialogFragment();
-                    // 建立 Bundle
-                    Bundle args = new Bundle();
-                    args.putString("result", result+" "+comment);
-                    dialogfragment.setArguments(args);
-                    // 顯示 MyDialogFragment
-                    dialogfragment.show(getFragmentManager(), "dialog");
-                }
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    setTitle("剩餘時間：" + millisUntilFinished/1000);
-                }
-            }.start();
-            for(GopherSprite g : glist) {
-                handler.post(g);
+                showResult();
             }
-            return true;
+            @Override
+            public void onTick(long millisUntilFinished) {
+                setTitle("剩餘時間：" + millisUntilFinished/1000);
+            }
+        }.start();
+        for(GopherSprite g : glist) {
+            handler.post(g);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+
+    /**
+     * 顯示結果
+     */
+    public void showResult(){
+        String s = textView.getText().toString();
+        int is = Integer.parseInt(s);
+        String result = "你的分數是" + s;
+        String comment = "";
+        if(is<0){
+            comment = "已無力吐槽...";
+        }else if(is==0){
+            comment = "小學生都比你強";
+        }else if(is>=1 && is<=3){
+            comment = "嗨~遜咖 A_A(@m)";
+        }else if(is>=4 && is<=6){
+            comment = "馬馬虎虎啦";
+        }else if(is>=7 && is<=9){
+            comment = "唉唷~不錯喔";
+        }else if(is>=10 && is<=12){
+            comment = "豪逆害＼(^o^)／";
+        }else if(is>=13 && is<=15){
+            comment = "加藤鷹 是你 @o@?";
+        }else if(is>16){
+            comment = "幹你用外掛喔!?";
+        }
+
+
+        // 建立 MyDialogFragment
+        MyDialogFragment dialogfragment = new MyDialogFragment();
+        // 建立 Bundle
+        Bundle args = new Bundle();
+        args.putString("result", result+"   "+comment);
+        dialogfragment.setArguments(args);
+        // 顯示 MyDialogFragment
+        dialogfragment.show(getFragmentManager(), "dialog");
     }
 
 
