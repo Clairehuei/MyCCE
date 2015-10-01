@@ -1,6 +1,6 @@
 package com.codekitchen.allen.mycce;
 
-import android.content.Intent;
+
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -9,15 +9,12 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -33,6 +30,13 @@ public class Activity_Gopher1 extends AppCompatActivity {
     private SoundPool soundPool;
     private int touchId;
     private int score;
+
+
+    //以下設置連點參數
+    private final int DOUBLE_TAP_TIMEOUT = 200;
+    private MotionEvent mCurrentDownEvent;
+    private MotionEvent mPreviousUpEvent;
+
 
     @InjectView(R.id.btnStartGame)
     Button btnStartGame;
@@ -129,6 +133,45 @@ public class Activity_Gopher1 extends AppCompatActivity {
             return false;
         }
     }
+
+
+
+    private class GopherOnDoubleTouchListener implements View.OnTouchListener {
+        GopherSprite g;
+        GopherOnDoubleTouchListener(GopherSprite g) {
+            this.g = g;
+        }
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (mPreviousUpEvent != null  && mCurrentDownEvent != null  && isConsideredDoubleTap(mCurrentDownEvent, mPreviousUpEvent, event)) {
+                    Log.e("mTouchListener", "Double click=============");
+                }
+                mCurrentDownEvent = MotionEvent.obtain(event);
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                mPreviousUpEvent = MotionEvent.obtain(event);
+            }
+            return true;
+        }
+    }
+
+    /**
+     * 判斷是否當前為連點動作
+     * @param firstDown
+     * @param firstUp
+     * @param secondDown
+     * @return
+     */
+    private boolean isConsideredDoubleTap(MotionEvent firstDown, MotionEvent firstUp, MotionEvent secondDown) {
+        if (secondDown.getEventTime() - firstUp.getEventTime() > DOUBLE_TAP_TIMEOUT) {
+            return false;
+        }
+        int deltaX = (int) firstUp.getX() - (int) secondDown.getX();
+        int deltaY = (int) firstUp.getY() - (int) secondDown.getY();
+        return deltaX * deltaX + deltaY * deltaY < 10000;
+    }
+
+
 
     // 建立音效池
     private void buildSoundPool() {
