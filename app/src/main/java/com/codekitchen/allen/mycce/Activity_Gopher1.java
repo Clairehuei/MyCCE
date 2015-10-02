@@ -15,6 +15,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -24,6 +31,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
     private ImageView[] imageViewList;
     private TextView textView;
     private int[] gopher;
+    private int[] gopher2;
     private boolean play;
     private Handler handler;
     private GopherSprite[] glist;
@@ -38,8 +46,34 @@ public class Activity_Gopher1 extends AppCompatActivity {
     private MotionEvent mPreviousUpEvent;
 
 
+    //設置難度
+    boolean isChangeHole = true;
+
+    //
+    Map<ImageView, Integer> map = new HashMap();
+
+
     @InjectView(R.id.btnStartGame)
     Button btnStartGame;
+
+    @InjectView(R.id.imageView)
+    ImageView imageView;
+
+    @InjectView(R.id.imageView2)
+    ImageView imageView2;
+
+    @InjectView(R.id.imageView3)
+    ImageView imageView3;
+
+    @InjectView(R.id.imageView4)
+    ImageView imageView4;
+
+    @InjectView(R.id.imageView5)
+    ImageView imageView5;
+
+    @InjectView(R.id.imageView6)
+    ImageView imageView6;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +82,17 @@ public class Activity_Gopher1 extends AppCompatActivity {
         ButterKnife.inject(this);
 
         imageViewList = new ImageView[] {
-                (ImageView) findViewById(R.id.imageView),
-                (ImageView) findViewById(R.id.imageView2),
-                (ImageView) findViewById(R.id.imageView3),
-                (ImageView) findViewById(R.id.imageView4),
-                (ImageView) findViewById(R.id.imageView5),
-                (ImageView) findViewById(R.id.imageView6)
+                imageView,
+                imageView2,
+                imageView3,
+                imageView4,
+                imageView5,
+                imageView6
         };
 
-        textView = (TextView) findViewById(R.id.textView);
+        textView = (TextView) findViewById(R.id.textView);//imageView2
 
-        // 建立地鼠輪詢陣列
+        // 建立普通地鼠輪詢陣列
         gopher = new int[] {
                 R.drawable.hole,
                 R.drawable.mole1,
@@ -68,25 +102,51 @@ public class Activity_Gopher1 extends AppCompatActivity {
                 R.drawable.mole1,
                 R.drawable.hole};
 
+        // 建立頭盔地鼠輪詢陣列
+        gopher2 = new int[] {
+                R.drawable.hole,
+                R.drawable.smole1,
+                R.drawable.smole2,
+                R.drawable.smole3,
+                R.drawable.smole2,
+                R.drawable.smole1,
+                R.drawable.hole};
+
         handler = new Handler();
         // 建立音效池
         buildSoundPool();
         // 建立地鼠遊戲物件與註冊 onTouch 監聽器
         glist = new GopherSprite[6];
+
         for(int i=0;i<glist.length;i++) {
-            glist[i] = new GopherSprite(imageViewList[i]);
-            imageViewList[i].setOnTouchListener(new GopherOnTouchListener(glist[i]));
+            if(i==0 || i==2 || i==4){
+                glist[i] = new GopherSprite(imageViewList[i], i);
+                imageViewList[i].setOnTouchListener(new GopherOnTouchListener(glist[i]));//設定單次點擊
+                map.put(imageViewList[i], i);
+            }else{
+                glist[i] = new SuperGopherSprite(imageViewList[i], i);
+                imageViewList[i].setOnTouchListener(new GopherOnDoubleTouchListener((SuperGopherSprite)glist[i]));//設定雙擊
+                map.put(imageViewList[i], i);
+            }
         }
+
     }
 
 
+    //普通地鼠
     private class GopherSprite implements Runnable {
         ImageView imageView;
         int idx;
         boolean hit;
+        int gNumber;
+        int type = 0;
 
-        GopherSprite(ImageView imageView) {
+        private GopherSprite() {
+        }
+
+        GopherSprite(ImageView imageView, int number) {
             this.imageView = imageView;
+            this.gNumber = number;
         }
 
         @Override
@@ -102,17 +162,64 @@ public class Activity_Gopher1 extends AppCompatActivity {
                 imageView.setImageResource(R.drawable.mole4);
                 hit = false;
                 idx = 0;
+                changeHole(this);
                 handler.postDelayed(this, 1000);
             } else {
                 idx = idx % gopher.length;
                 imageView.setImageResource(gopher[idx]);
                 int n = (int)(Math.random() * 1000) % 3 + 1;
+                if(idx==6){
+                    changeHole(this);
+                }
                 handler.postDelayed(this, (n*100));
                 idx = ++idx % gopher.length;
             }
         }
     }
 
+    //頭盔地鼠
+    private class SuperGopherSprite extends GopherSprite {
+        ImageView imageView;
+        int idx;
+        boolean hit;
+        int gNumber;
+        int type = 1;
+
+        SuperGopherSprite(ImageView imageView, int number) {
+            this.imageView = imageView;
+            this.gNumber = number;
+        }
+
+        @Override
+        public void run() {
+            draw();
+        }
+
+        private void draw() {
+            if(!play) {
+                return;
+            }
+            if(hit) {
+                imageView.setImageResource(R.drawable.smole4);
+                hit = false;
+                idx = 0;
+                changeHole(this);
+                handler.postDelayed(this, 1000);
+            } else {
+                idx = idx % gopher2.length;
+                imageView.setImageResource(gopher2[idx]);
+                int n = (int)(Math.random() * 1000) % 3 + 1;
+                if(idx==6){
+                    changeHole(this);
+                }
+                handler.postDelayed(this, (n*100));
+                idx = ++idx % gopher2.length;
+            }
+        }
+    }
+
+
+    //單次點擊偵聽物件
     private class GopherOnTouchListener implements View.OnTouchListener {
         GopherSprite g;
         GopherOnTouchListener(GopherSprite g) {
@@ -135,25 +242,100 @@ public class Activity_Gopher1 extends AppCompatActivity {
     }
 
 
-
+    //雙點擊偵聽物件
     private class GopherOnDoubleTouchListener implements View.OnTouchListener {
-        GopherSprite g;
-        GopherOnDoubleTouchListener(GopherSprite g) {
+        SuperGopherSprite g;
+        GopherOnDoubleTouchListener(SuperGopherSprite g) {
             this.g = g;
         }
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (mPreviousUpEvent != null  && mCurrentDownEvent != null  && isConsideredDoubleTap(mCurrentDownEvent, mPreviousUpEvent, event)) {
+            Log.e("!!!!!onTouch!!!! = ", event.getAction()+"");
+            if (play && event.getAction() == MotionEvent.ACTION_DOWN) {
+                Log.e("mPreviousUpEvent(1) = ", mPreviousUpEvent+"");
+                Log.e("mCurrentDownEvent = ", mCurrentDownEvent+"");
+                if ((gopher2[g.idx] == R.drawable.smole2 || gopher2[g.idx] == R.drawable.smole3) &&
+                        mPreviousUpEvent != null  && mCurrentDownEvent != null  && isConsideredDoubleTap(mCurrentDownEvent, mPreviousUpEvent, event)) {
                     Log.e("mTouchListener", "Double click=============");
+                    g.hit = true;
+                    soundPool.play(touchId, 1.0F, 1.0F, 0, 0, 1.0F);
+                    textView.setText(String.valueOf(++score));
+                }else {
+                    //textView.setText(String.valueOf(--score));
                 }
+
                 mCurrentDownEvent = MotionEvent.obtain(event);
+                return true;
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                Log.e("else = ", "1111111111111111111111");
                 mPreviousUpEvent = MotionEvent.obtain(event);
+                Log.e("mPreviousUpEvent(2) = ", mPreviousUpEvent+"");
+                return true;
             }
-            return true;
+
+            return false;
         }
     }
+
+
+    //變更地鼠所在的洞穴以及變更新洞穴的onTouch事件
+    public void changeHole(GopherSprite g){
+        if(isChangeHole){
+            //1.取消註冊(自己當前的洞穴)
+            cancleRegitHole(g);
+
+            //2.取得當前空的洞穴
+            List<ImageView> li = getNholes();
+
+            //3.隨機註冊一個空的洞穴
+            ImageView iv = getOneHole(li);
+            g.imageView = iv;
+            if(iv!=null){
+                Log.e("xxx","iv!=null");
+            }else{
+                Log.e("xxx","iv is null");
+            }
+            if(g.type==0){//普通地鼠
+                iv.setOnTouchListener(new GopherOnTouchListener(g));
+            }else if(g.type==1){//頭盔地鼠
+                iv.setOnTouchListener(new GopherOnDoubleTouchListener((SuperGopherSprite)g));
+            }
+        }
+    }
+
+
+    //取消註冊(自己當前的洞穴)
+    public void cancleRegitHole(GopherSprite g){
+        map.put(g.imageView, -1);
+    }
+
+
+    //取得當前所有空的洞穴
+    public List<ImageView> getNholes(){
+        List<ImageView> li = new ArrayList();
+
+        for (Map.Entry<ImageView, Integer> entry : map.entrySet())
+        {
+            Log.e("list = ",entry.getKey() + "/" + entry.getValue());
+            if(entry.getValue()==-1){
+                li.add(entry.getKey());
+            }
+        }
+
+        return li;
+    }
+
+
+    //從傳入的洞穴中隨機取得一個洞穴
+    public ImageView getOneHole(List<ImageView> li){
+
+        Random r = new Random();
+        Log.e("li.get(XXX)=",r.nextInt(li.size())+"");
+
+        return li.get(r.nextInt(li.size()));
+    }
+
+
 
     /**
      * 判斷是否當前為連點動作
@@ -163,12 +345,15 @@ public class Activity_Gopher1 extends AppCompatActivity {
      * @return
      */
     private boolean isConsideredDoubleTap(MotionEvent firstDown, MotionEvent firstUp, MotionEvent secondDown) {
+        Log.e("isConsideredDoubleTap", "xxxx");
         if (secondDown.getEventTime() - firstUp.getEventTime() > DOUBLE_TAP_TIMEOUT) {
             return false;
         }
         int deltaX = (int) firstUp.getX() - (int) secondDown.getX();
         int deltaY = (int) firstUp.getY() - (int) secondDown.getY();
-        return deltaX * deltaX + deltaY * deltaY < 10000;
+        boolean b = deltaX * deltaX + deltaY * deltaY < 10000;
+        Log.e("(R) = ", b+"");
+        return b;
     }
 
 
@@ -207,7 +392,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
         new CountDownTimer(20*1000, 1000){
             @Override
             public void onFinish() {
-                play = false;
+                play = false;//時間到,停止遊戲
                 //item.setEnabled(true);
                 btnStartGame.setEnabled(true);
                 setTitle("剩餘時間：0");
@@ -236,9 +421,9 @@ public class Activity_Gopher1 extends AppCompatActivity {
         if(is<0){
             comment = "已無力吐槽...";
         }else if(is==0){
-            comment = "小學生都比你強";
-        }else if(is>=1 && is<=3){
             comment = "嗨~遜咖 A_A(@m)";
+        }else if(is>=1 && is<=3){
+            comment = "小學生都比你強";
         }else if(is>=4 && is<=6){
             comment = "馬馬虎虎啦";
         }else if(is>=7 && is<=9){
