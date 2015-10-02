@@ -45,9 +45,16 @@ public class Activity_Gopher1 extends AppCompatActivity {
     private MotionEvent mCurrentDownEvent;
     private MotionEvent mPreviousUpEvent;
 
+    int a0 = 0;
+    int a1 = 1;
+    int a2 = 2;
+    int a3 = 3;
+    int a4 = 4;
+    int a5 = 5;
+
 
     //設置難度
-    boolean isChangeHole = true;
+    boolean isChangeHole = false;
 
     //
     Map<ImageView, Integer> map = new HashMap();
@@ -172,6 +179,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
                     changeHole(this);
                 }
                 handler.postDelayed(this, (n*100));
+
                 idx = ++idx % gopher.length;
             }
         }
@@ -179,15 +187,11 @@ public class Activity_Gopher1 extends AppCompatActivity {
 
     //頭盔地鼠
     private class SuperGopherSprite extends GopherSprite {
-        ImageView imageView;
-        int idx;
-        boolean hit;
-        int gNumber;
-        int type = 1;
 
         SuperGopherSprite(ImageView imageView, int number) {
             this.imageView = imageView;
             this.gNumber = number;
+            this.type = 1;
         }
 
         @Override
@@ -250,13 +254,10 @@ public class Activity_Gopher1 extends AppCompatActivity {
         }
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            Log.e("!!!!!onTouch!!!! = ", event.getAction()+"");
             if (play && event.getAction() == MotionEvent.ACTION_DOWN) {
-                Log.e("mPreviousUpEvent(1) = ", mPreviousUpEvent+"");
-                Log.e("mCurrentDownEvent = ", mCurrentDownEvent+"");
+
                 if ((gopher2[g.idx] == R.drawable.smole2 || gopher2[g.idx] == R.drawable.smole3) &&
                         mPreviousUpEvent != null  && mCurrentDownEvent != null  && isConsideredDoubleTap(mCurrentDownEvent, mPreviousUpEvent, event)) {
-                    Log.e("mTouchListener", "Double click=============");
                     g.hit = true;
                     soundPool.play(touchId, 1.0F, 1.0F, 0, 0, 1.0F);
                     textView.setText(String.valueOf(++score));
@@ -267,9 +268,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
                 mCurrentDownEvent = MotionEvent.obtain(event);
                 return true;
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                Log.e("else = ", "1111111111111111111111");
                 mPreviousUpEvent = MotionEvent.obtain(event);
-                Log.e("mPreviousUpEvent(2) = ", mPreviousUpEvent+"");
                 return true;
             }
 
@@ -281,6 +280,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
     //變更地鼠所在的洞穴以及變更新洞穴的onTouch事件
     public void changeHole(GopherSprite g){
         if(isChangeHole){
+            Log.e("gNumber=","=="+g.gNumber+"==");
             //1.取消註冊(自己當前的洞穴)
             cancleRegitHole(g);
 
@@ -290,11 +290,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
             //3.隨機註冊一個空的洞穴
             ImageView iv = getOneHole(li);
             g.imageView = iv;
-            if(iv!=null){
-                Log.e("xxx","iv!=null");
-            }else{
-                Log.e("xxx","iv is null");
-            }
+            map.put(g.imageView, g.gNumber);
             if(g.type==0){//普通地鼠
                 iv.setOnTouchListener(new GopherOnTouchListener(g));
             }else if(g.type==1){//頭盔地鼠
@@ -316,7 +312,6 @@ public class Activity_Gopher1 extends AppCompatActivity {
 
         for (Map.Entry<ImageView, Integer> entry : map.entrySet())
         {
-            Log.e("list = ",entry.getKey() + "/" + entry.getValue());
             if(entry.getValue()==-1){
                 li.add(entry.getKey());
             }
@@ -328,10 +323,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
 
     //從傳入的洞穴中隨機取得一個洞穴
     public ImageView getOneHole(List<ImageView> li){
-
         Random r = new Random();
-        Log.e("li.get(XXX)=",r.nextInt(li.size())+"");
-
         return li.get(r.nextInt(li.size()));
     }
 
@@ -345,14 +337,13 @@ public class Activity_Gopher1 extends AppCompatActivity {
      * @return
      */
     private boolean isConsideredDoubleTap(MotionEvent firstDown, MotionEvent firstUp, MotionEvent secondDown) {
-        Log.e("isConsideredDoubleTap", "xxxx");
         if (secondDown.getEventTime() - firstUp.getEventTime() > DOUBLE_TAP_TIMEOUT) {
             return false;
         }
         int deltaX = (int) firstUp.getX() - (int) secondDown.getX();
         int deltaY = (int) firstUp.getY() - (int) secondDown.getY();
         boolean b = deltaX * deltaX + deltaY * deltaY < 10000;
-        Log.e("(R) = ", b+"");
+
         return b;
     }
 
