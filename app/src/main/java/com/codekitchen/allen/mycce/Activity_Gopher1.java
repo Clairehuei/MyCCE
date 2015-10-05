@@ -418,7 +418,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
         MyDialogFragment dialogfragment = new MyDialogFragment();
         // 建立 Bundle
         Bundle args = new Bundle();
-        args.putString("result", result+"   "+comment);
+        args.putString("result", result + "   " + comment);
         dialogfragment.setArguments(args);
         // 顯示 MyDialogFragment
         dialogfragment.show(getFragmentManager(), "dialog");
@@ -428,12 +428,29 @@ public class Activity_Gopher1 extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        cdt.cancel();
+        if(cdt!=null){
+            cdt.cancel();
+        }
         if (handler != null) {
             for(RunGopherSprite g : rglist) {
                 handler.removeCallbacks(g);
             }
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        if(cdt!=null){
+            cdt.cancel();
+        }
+
+        if (handler != null) {
+            for(RunGopherSprite g : rglist) {
+                handler.removeCallbacks(g);
+            }
+        }
+        super.onDestroy();
     }
 
 

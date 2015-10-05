@@ -148,6 +148,7 @@
         </activity>
         <activity
             android:name=".Activity_Gopher1"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_activity__gopher1" >
         </activity>
     </application>
