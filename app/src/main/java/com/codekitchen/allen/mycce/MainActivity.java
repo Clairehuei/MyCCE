@@ -89,4 +89,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.threeNineTry)
+    void threeNineTryClick(){
+        Intent intent = new Intent(this, Activity_Async.class);
+        startActivity(intent);
+    }
+
+
 }

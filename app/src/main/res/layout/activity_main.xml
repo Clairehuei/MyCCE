@@ -73,7 +73,7 @@
             android:id="@+id/threeNineTry"
             style="@style/MainButton"
             android:drawableTop="@drawable/btn_ball_fire"
-            tools:text="@string/threeNineTry"
+            android:text="asynctask"
             app:layout_gravity="center" />
 
         <Button
