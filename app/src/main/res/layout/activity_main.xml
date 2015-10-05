@@ -30,7 +30,7 @@
         <Button
             android:id="@+id/bingo"
             style="@style/MainButton"
-            android:drawableTop="@drawable/btn_ball_fire"
+            android:drawableTop="@drawable/bingo1"
             android:text="@string/bingo"
             app:layout_gravity="center" />
 
@@ -39,7 +39,7 @@
             style="@style/MainButton"
             android:drawableTop="@drawable/btn_ball_fire"
             app:layout_gravity="center"
-            android:text="@string/bigFuTry" />
+            android:text="ListView" />
 
         <Button
             android:id="@+id/wayLiTry"
@@ -65,7 +65,7 @@
         <Button
             android:id="@+id/fourNineTry"
             style="@style/MainButton"
-            android:drawableTop="@drawable/btn_ball_fire"
+            android:drawableTop="@drawable/gopher_sprite"
             android:text="打地鼠"
             app:layout_gravity="center" />
 
