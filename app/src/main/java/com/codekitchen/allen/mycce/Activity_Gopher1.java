@@ -3,7 +3,9 @@ package com.codekitchen.allen.mycce;
 
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -63,6 +65,8 @@ public class Activity_Gopher1 extends AppCompatActivity {
     ImageView imageView6;
 
     CountDownTimer cdt;
+
+    MediaPlayer backgroundMusic;
 
 
     @Override
@@ -366,6 +370,7 @@ public class Activity_Gopher1 extends AppCompatActivity {
         score = 0;
         textView.setText("0");
         btnStartGame.setEnabled(false);
+        openBackgroundMusic();
         cdt = new CountDownTimer(20*1000, 1000){
             @Override
             public void onFinish() {
@@ -428,9 +433,13 @@ public class Activity_Gopher1 extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        if(backgroundMusic!=null){
+            backgroundMusic.stop();
+        }
         if(cdt!=null){
             cdt.cancel();
         }
+
         if (handler != null) {
             for(RunGopherSprite g : rglist) {
                 handler.removeCallbacks(g);
@@ -444,13 +453,26 @@ public class Activity_Gopher1 extends AppCompatActivity {
         if(cdt!=null){
             cdt.cancel();
         }
-
+        if(backgroundMusic!=null){
+            backgroundMusic.stop();
+        }
         if (handler != null) {
             for(RunGopherSprite g : rglist) {
                 handler.removeCallbacks(g);
             }
         }
         super.onDestroy();
+    }
+
+
+    /**
+     * 開啟背景音樂
+     */
+    public void openBackgroundMusic(){
+        backgroundMusic = MediaPlayer.create(Activity_Gopher1.this, R.raw.tos);
+        backgroundMusic.setLooping(true); // Set looping
+        backgroundMusic.setVolume(10,10);
+        backgroundMusic.start();
     }
 
 
