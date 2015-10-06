@@ -96,4 +96,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.fiveThreeNine)
+    void fiveThreeNineClick(){
+        Intent intent = new Intent(this, Activity_Pili_Main.class);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.threeStarTry)
+    void threeStarTryClick(){
+        Intent intent = new Intent(this, Activity_Surface.class);
+        startActivity(intent);
+    }
+
+
 }

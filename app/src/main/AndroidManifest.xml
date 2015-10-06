@@ -156,6 +156,15 @@
             android:name=".Activity_Async"
             android:label="@string/title_activity_activity__async" >
         </activity>
+        <activity
+            android:name=".Activity_Pili_Main"
+            android:label="@string/title_activity_activity__pili__main"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".Activity_Surface"
+            android:label="@string/title_activity_activity__surface" >
+        </activity>
     </application>
 
 </manifest>

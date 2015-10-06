@@ -43,6 +43,8 @@
     <string name="title_activity_activity_fragment2">Activity_fragment2</string>
     <string name="title_activity_activity__gopher1">打地鼠</string>
     <string name="title_activity_activity__async">Activity_Async</string>
+    <string name="title_activity_activity__pili__main">Activity_Pili_Main</string>
+    <string name="title_activity_activity__surface">Activity_Surface</string>
 
 
 </resources>

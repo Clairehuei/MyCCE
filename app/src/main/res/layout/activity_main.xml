@@ -80,7 +80,7 @@
             android:id="@+id/fiveThreeNine"
             style="@style/MainButton"
             android:drawableTop="@drawable/btn_ball_fire"
-            tools:text="@string/fiveThreeNine"
+            android:text="PILI"
             app:layout_gravity="center" />
 
         <Space />
@@ -89,7 +89,7 @@
             android:id="@+id/threeStarTry"
             style="@style/MainButton"
             android:drawableTop="@drawable/btn_ball_fire"
-            tools:text="@string/threeStarTry"
+            android:text="Surface"
             app:layout_gravity="center" />
 
         <Button
