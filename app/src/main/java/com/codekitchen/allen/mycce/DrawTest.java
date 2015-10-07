@@ -54,13 +54,16 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
     //技能1
     Bitmap skill1;
-    int xsk1 = 0, ysk1 = 0;
+    int xsk1 = 0, ysk1 = 0;//技能的飛行座標
 
     //發動技能時的本體位置
     int hxsk1 = 0, hysk1 = 0;
 
-    //分數
+    //打王分數
     int iscore = 0;
+
+    //被打分數
+    int jscore = 100;
 
     //分數畫筆
     private Paint scorePaint;
@@ -72,7 +75,7 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
     //魔王技能1
     Bitmap bossSkill1;
-    int bossXsk1 = 0, bossYsk1 = 0;
+    int bossXsk1 = 0, bossYsk1 = 0;//技能的飛行座標
 
     //發動技能時的魔王位置
     int bxsk1 = 0, bysk1 = 0;
@@ -151,9 +154,11 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
         bp = BitmapFactory.decodeResource(getResources(), R.drawable.btn_ball_fire);
         heroBold = BitmapFactory.decodeResource(getResources(), R.drawable.hero_blod);
         skill1 = BitmapFactory.decodeResource(getResources(), R.drawable.skill1);
+        bossSkill1 = BitmapFactory.decodeResource(getResources(), R.drawable.boss_skill1);
         boss = BitmapFactory.decodeResource(getResources(), R.drawable.boss);
         bossW = boss.getWidth();
         bossH = boss.getHeight();
+        bossUseSkill1 = true;
 
         Log.e("ball_width",bp.getWidth()+"");
         Log.e("ball_height",bp.getHeight()+"");
@@ -281,7 +286,7 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
                 canvas.drawBitmap(skill1, xsk1, ysk1, null);
 
-                //判斷是否擊中
+                //判斷是否擊中魔王
                 if(isCollsionWithRect3(xsk1, ysk1, skill1, bossX, bossY, bossW, bossH)){//命中目標
                     isSkill1Running = false;
                     iscore = iscore+1;
@@ -289,11 +294,59 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
                 }
 
+
                 useSkill1 = false;
+            }
+
+            //判斷是否被魔王擊中
+            //TODO...
+            //判斷是否使用技能1
+            //判斷是否使用技能1
+            if(bossUseSkill1 || isBossSkill1Running){
+
+                if(bossUseSkill1){
+//                    Log.e("skill_width",skill1.getWidth()+"");
+//                    Log.e("skill_height",skill1.getHeight()+"");
+//                    Log.e("ball_width",bp.getWidth()+"");
+//                    Log.e("ball_height",bp.getHeight()+"");
+
+                    isBossSkill1Running  = true;
+                    bossXsk1 = bossX+56;
+                    bossYsk1 = bossY+56;
+                    bxsk1 = bossXsk1;
+                    bysk1 = bossYsk1;
+                }
+
+                if(isBossSkill1Running){
+                    bossYsk1 = bossYsk1+56;
+                    if(bossYsk1+50>700){
+                        isBossSkill1Running = false;
+                        bossUseSkill1 = true;
+                    }
+                }
+
+
+                canvas.drawBitmap(bossSkill1, bossXsk1, bossYsk1, null);
+
+                //判斷是否擊中英雄
+                if(isCollsionWithRect4(bossXsk1, bossYsk1, bossSkill1, x, y, bp.getWidth(), bp.getHeight())){//命中目標
+                    isBossSkill1Running = false;
+                    bossUseSkill1 = true;
+                    jscore = jscore - 1;
+                }else{//未命中
+
+                }
+
+
+                if(isBossSkill1Running){
+                    bossUseSkill1 = false;
+                }
+
             }
 
             //繪製分數
             canvas.drawText(String.valueOf(iscore), 580, 60, scorePaint);
+            canvas.drawText(String.valueOf(jscore), 580, 120, scorePaint);
 
         }else{
             Log.e("daw.canvas","canvas is null");
@@ -425,7 +478,7 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
 
     /**
-     * 判斷 Skill 1 是否有擊中
+     * 判斷 Skill 1 是否有擊中魔王
      * 矩形碰撞的函数
      * @param x2 第二个矩形的X坐标
      * @param y2 第二个矩形的Y坐标
@@ -433,6 +486,31 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
      * @param h2 第二个矩形的高
      */
     public boolean isCollsionWithRect3(int sx, int sy, Bitmap tbp, int x2, int y2,int w2,int h2){
+
+        if(sx>= x2+w2){
+            return false;
+        }else if(sx+tbp.getWidth()<=x2){
+            return false;
+        }else if(sy+tbp.getHeight()<=y2){
+            return false;
+        }else if(sy>=y2+h2){
+            return false;
+        }
+
+        //所有不會發生碰撞都不滿足時，就是碰撞
+        return true;
+    }
+
+
+    /**
+     * 判斷 Skill 1 是否有擊中英雄
+     * 矩形碰撞的函数
+     * @param x2 第二个矩形的X坐标
+     * @param y2 第二个矩形的Y坐标
+     * @param w2 第二个矩形的宽
+     * @param h2 第二个矩形的高
+     */
+    public boolean isCollsionWithRect4(int sx, int sy, Bitmap tbp, int x2, int y2,int w2,int h2){
 
         if(sx>= x2+w2){
             return false;
