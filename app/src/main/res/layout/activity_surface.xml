@@ -18,19 +18,42 @@
         android:layout_height="wrap_content"
         android:text="左"
         android:id="@+id/btnLeft"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="54dp"
         android:layout_alignBottom="@+id/olaview"
-        android:layout_toStartOf="@+id/btnRight"
-        android:layout_marginEnd="22dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="右"
         android:id="@+id/btnRight"
-        android:layout_marginEnd="64dp"
         android:layout_alignTop="@+id/btnLeft"
-        android:layout_alignEnd="@+id/olaview" />
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上"
+        android:id="@+id/btnUp"
+        android:layout_above="@+id/btnLeft"
+        android:layout_alignStart="@+id/btnDown" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下"
+        android:id="@+id/btnDown"
+        android:layout_below="@+id/btnRight"
+        android:layout_alignEnd="@+id/btnRight"
+        android:layout_marginEnd="55dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skill"
+        android:id="@+id/btnSkill"
+        android:layout_alignBottom="@+id/btnRight"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

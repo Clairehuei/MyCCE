@@ -163,7 +163,8 @@
         </activity>
         <activity
             android:name=".Activity_Surface"
-            android:label="@string/title_activity_activity__surface" >
+            android:label="@string/title_activity_activity__surface"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

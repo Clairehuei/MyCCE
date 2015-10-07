@@ -1,14 +1,17 @@
 package com.codekitchen.allen.mycce;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -16,82 +19,138 @@ import butterknife.OnClick;
 
 public class Activity_Surface extends AppCompatActivity {
 
-//    @InjectView(R.id.btnLeft)
-//    Button btnLeft;
-//
-//    @InjectView(R.id.btnRight)
-//    Button btnRight;
-
-
-//    @InjectView(R.id.olaview)
-//    SurfaceView surfaceView;
-
     DrawTest vdt;
 
     Button btnLeft;
     Button btnRight;
-
+    Button btnUp;
+    Button btnDown;
+    Button btnSkill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ButterKnife.inject(this);
-
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//隱去標題
-////
-//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        ButterKnife.inject(this);//目前有surfaceview的activity使用ButterKnife會報錯,暫時無解
 
         setContentView(R.layout.activity_surface);
 
+        //取得畫面上按鈕映射對象
         vdt = (DrawTest)findViewById(R.id.olaview);
         btnLeft = (Button)findViewById(R.id.btnLeft);
         btnRight = (Button)findViewById(R.id.btnRight);
+        btnUp = (Button)findViewById(R.id.btnUp);
+        btnDown = (Button)findViewById(R.id.btnDown);
+        btnSkill = (Button)findViewById(R.id.btnSkill);
 
-        btnLeft.setOnClickListener(mOnClickListener1);
-        btnRight.setOnClickListener(mOnClickListener2);
+        //設定按鈕偵聽touch事件
+        btnLeft.setOnTouchListener(mOnTouchistenerLeft);
+        btnRight.setOnTouchListener(mOnTouchistenerRight);
+        btnUp.setOnTouchListener(mOnTouchistenerUp);
+        btnDown.setOnTouchListener(mOnTouchistenerDown);
+
+        btnSkill.setOnTouchListener(mOnClicklistenerSk1);
     }
 
 
-    private View.OnClickListener mOnClickListener1 = new View.OnClickListener(){
-        public void onClick(View v){
-            Log.e("btnLeftClick", "*********************************************************");
-            vdt.settLeft(true);
+    private View.OnTouchListener mOnTouchistenerLeft = new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                vdt.settLeft(true);
+                return true;
+            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                vdt.settLeft(true);
+                vdt.setIsMoveing(true);
+                return true;
+            } else if(event.getAction() == MotionEvent.ACTION_UP){
+                vdt.setIsMoveing(false);
+            }
+            return false;
         }
     };
 
-    private View.OnClickListener mOnClickListener2 = new View.OnClickListener(){
-        public void onClick(View v){
-            Log.e("btnRightClick", "*********************************************************");
-            vdt.settRight(true);
+
+    private View.OnTouchListener mOnTouchistenerRight = new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                vdt.settRight(true);
+                return true;
+            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                vdt.settRight(true);
+                vdt.setIsMoveing(true);
+                return true;
+            }else if(event.getAction() == MotionEvent.ACTION_UP){
+                vdt.setIsMoveing(false);
+            }
+            return false;
         }
     };
 
 
+    private View.OnTouchListener mOnTouchistenerUp = new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                vdt.settUp(true);
+                return true;
+            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                vdt.settUp(true);
+                vdt.setIsMoveing(true);
+                return true;
+            }else if(event.getAction() == MotionEvent.ACTION_UP){
+                vdt.setIsMoveing(false);
+            }
+            return false;
+        }
+    };
 
 
-//    @OnClick(R.id.btnLeft)
-//    void btnLeftClick(){
-//        Log.e("btnLeftClick","*********************************************************");
-//        vdt.settLeft(true);
-//    }
-//
-//    @OnClick(R.id.btnRight)
-//    void btnRightClick(){
-//        Log.e("btnLeftClick","<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-//        vdt.settRight(true);
-//    }
+    private View.OnTouchListener mOnTouchistenerDown = new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                vdt.settDown(true);
+                return true;
+            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                vdt.settDown(true);
+                vdt.setIsMoveing(true);
+                return true;
+            }else if(event.getAction() == MotionEvent.ACTION_UP){
+                vdt.setIsMoveing(false);
+            }
+            return false;
+        }
+    };
+
+
+    private View.OnTouchListener mOnClicklistenerSk1 = new View.OnTouchListener(){
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                //TODO
+                vdt.setUseSkill1(true);
+                return true;
+            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                //TODO
+                return true;
+            }else if(event.getAction() == MotionEvent.ACTION_UP){
+                //TODO
+            }
+            return false;
+        }
+    };
 
 
     @Override
     protected void onPause (){
         super.onPause();
     }
-
-
-
-
-
-
 
 
 }
