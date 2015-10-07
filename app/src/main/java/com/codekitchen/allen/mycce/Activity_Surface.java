@@ -2,6 +2,7 @@ package com.codekitchen.allen.mycce;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,11 +22,13 @@ public class Activity_Surface extends AppCompatActivity {
 
     DrawTest vdt;
 
-    Button btnLeft;
-    Button btnRight;
-    Button btnUp;
-    Button btnDown;
+//    Button btnLeft;
+//    Button btnRight;
+//    Button btnUp;
+//    Button btnDown;
     Button btnSkill;
+
+    MediaPlayer backgroundMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +39,26 @@ public class Activity_Surface extends AppCompatActivity {
 
         //取得畫面上按鈕映射對象
         vdt = (DrawTest)findViewById(R.id.olaview);
-        btnLeft = (Button)findViewById(R.id.btnLeft);
-        btnRight = (Button)findViewById(R.id.btnRight);
-        btnUp = (Button)findViewById(R.id.btnUp);
-        btnDown = (Button)findViewById(R.id.btnDown);
+//        btnLeft = (Button)findViewById(R.id.btnLeft);
+//        btnRight = (Button)findViewById(R.id.btnRight);
+//        btnUp = (Button)findViewById(R.id.btnUp);
+//        btnDown = (Button)findViewById(R.id.btnDown);
         btnSkill = (Button)findViewById(R.id.btnSkill);
 
+
         //設定按鈕偵聽touch事件
-        btnLeft.setOnTouchListener(mOnTouchistenerLeft);
-        btnRight.setOnTouchListener(mOnTouchistenerRight);
-        btnUp.setOnTouchListener(mOnTouchistenerUp);
-        btnDown.setOnTouchListener(mOnTouchistenerDown);
+//        btnLeft.setOnTouchListener(mOnTouchistenerLeft);
+//        btnRight.setOnTouchListener(mOnTouchistenerRight);
+//        btnUp.setOnTouchListener(mOnTouchistenerUp);
+//        btnDown.setOnTouchListener(mOnTouchistenerDown);
 
         btnSkill.setOnTouchListener(mOnClicklistenerSk1);
+
+        //開啟背景音樂
+        openBackgroundMusic();
     }
+
+
 
 
     private View.OnTouchListener mOnTouchistenerLeft = new View.OnTouchListener() {
@@ -147,9 +156,34 @@ public class Activity_Surface extends AppCompatActivity {
     };
 
 
+
+    /**
+     * 開啟背景音樂
+     */
+    public void openBackgroundMusic(){
+        Log.e("openBackgroundMusic", "openBackgroundMusic");
+        backgroundMusic = MediaPlayer.create(Activity_Surface.this, R.raw.tos_battle);
+        backgroundMusic.setLooping(true); // Set looping
+        backgroundMusic.setVolume(50,50);
+        backgroundMusic.start();
+    }
+
+
     @Override
     protected void onPause (){
         super.onPause();
+        if(backgroundMusic!=null){
+            backgroundMusic.stop();
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        if(backgroundMusic!=null){
+            backgroundMusic.stop();
+        }
+        super.onDestroy();
     }
 
 

@@ -37,7 +37,7 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
     private boolean tUp = false;
     private boolean tDown = false;
 
-    private int heroSpeed = 20;
+    private int heroSpeed = 10;
     private int bossSpeed = 17;
 
     //是否碰撞
@@ -93,6 +93,14 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
     //魔王技能1是否進行中
     private boolean isBossSkill1Running = false;
+
+
+    //方向鍵設置
+    Bitmap bmcircle;
+    Bitmap bncircle;
+    int mcircleX=10, mcircleY=750;
+    int ncircleX=80, ncircleY=820;
+    int mainX = 130, mainY = 870;//操控中心座標
 
 
     public void setUseSkill1(boolean useSkill1) {
@@ -160,6 +168,9 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
         bossH = boss.getHeight();
         bossUseSkill1 = true;
 
+        bmcircle = BitmapFactory.decodeResource(getResources(), R.drawable.mcircle);
+        bncircle = BitmapFactory.decodeResource(getResources(), R.drawable.ncircle);
+
         Log.e("ball_width",bp.getWidth()+"");
         Log.e("ball_height",bp.getHeight()+"");
 
@@ -178,6 +189,9 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
             //清除上次繪製的殘留影像
             canvas.drawColor(Color.BLACK);
+
+            canvas.drawBitmap(bmcircle, mcircleX, mcircleY, null);//方向鍵(外圈)固定
+            canvas.drawBitmap(bncircle, ncircleX, ncircleY, null);//方向鍵(內圈)可控制
 
             if(tLeft){
                 x = x-heroSpeed;
@@ -407,18 +421,80 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        // TODO Auto-generated method stub
-        //让矩形1随着触屏位置移动（触屏点设为此矩形的中心点）
-        x1 = (int) event.getX() - w1/2;
-        y1 = (int) event.getY() - h1/2;
-        //当矩形之间发生碰撞
-        if(isCollsionWithRect(x1,y1,w1,h1,x2,y2,w2,h2)){
-            isCollision = true;//设置标志位为真
-            //当矩形之间没有发生碰撞
-        }else{
-            isCollision = false; //设置标志位为假
+//        // TODO Auto-generated method stub
+//        //让矩形1随着触屏位置移动（触屏点设为此矩形的中心点）
+//        x1 = (int) event.getX() - w1/2;
+//        y1 = (int) event.getY() - h1/2;
+//        //当矩形之间发生碰撞
+//        if(isCollsionWithRect(x1,y1,w1,h1,x2,y2,w2,h2)){
+//            isCollision = true;//设置标志位为真
+//            //当矩形之间没有发生碰撞
+//        }else{
+//            isCollision = false; //设置标志位为假
+//        }
+//        return true;
+
+
+        Log.e("onTouchEvent","onTouchEvent");
+
+        //以下計算方向鍵
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Log.e("onTouchEvent","ACTION_DOWN");
+            calMoveCoordinate(event.getX(), event.getY());
+            return true;
+        } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            Log.e("onTouchEvent","ACTION_MOVE");
+            calMoveCoordinate(event.getX(), event.getY());
+            return true;
         }
-        return true;
+
+        return false;
+    }
+
+
+    public void calMoveCoordinate(float x, float y){
+
+        int p = (int)x - mainX, q = (int)y - mainY;
+        int moveX, moveY;
+
+
+        //垂直上下移動
+        if(p==0){
+            if(q<0){
+                moveY = -heroSpeed;
+            }else {
+                moveY = heroSpeed;
+            }
+            this.y = this.y + moveY;
+            return;
+        }
+
+        //水平左右移動
+        if(q==0){
+            if(p<0){
+                moveX = -heroSpeed;
+            }else {
+                moveX = heroSpeed;
+            }
+            this.x = this.x + moveX;
+            return;
+        }
+
+
+
+        double z = Math.sqrt((p*p)+(q*q));
+
+        moveX = (int)(p*heroSpeed/z);
+        moveY = (int)Math.sqrt((heroSpeed*heroSpeed)-(moveX*moveX));
+
+        if(q<0){
+            moveY = -moveY;
+        }
+
+
+
+        this.x = this.x + moveX;
+        this.y = this.y + moveY;
     }
 
 
