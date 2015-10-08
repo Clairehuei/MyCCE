@@ -1,31 +1,19 @@
 package com.codekitchen.allen.mycce;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+
+import android.animation.ValueAnimator;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-
-public class Activity_Surface extends AppCompatActivity {
+public class Activity_Surface extends AppCompatActivity implements IOnEndOfGameInterface {
 
     DrawTest vdt;
-
-//    Button btnLeft;
-//    Button btnRight;
-//    Button btnUp;
-//    Button btnDown;
     Button btnSkill;
 
     MediaPlayer backgroundMusic;
@@ -39,102 +27,25 @@ public class Activity_Surface extends AppCompatActivity {
 
         //取得畫面上按鈕映射對象
         vdt = (DrawTest)findViewById(R.id.olaview);
-//        btnLeft = (Button)findViewById(R.id.btnLeft);
-//        btnRight = (Button)findViewById(R.id.btnRight);
-//        btnUp = (Button)findViewById(R.id.btnUp);
-//        btnDown = (Button)findViewById(R.id.btnDown);
+        vdt.setIOnEndOfGame(this);
+        vdt.initHandler();//(重點技巧!!!!)將handler 在UI thread 初始化, 因此就可以在 SurfaceView裡面與 UI thread交流
         btnSkill = (Button)findViewById(R.id.btnSkill);
-
-
-        //設定按鈕偵聽touch事件
-//        btnLeft.setOnTouchListener(mOnTouchistenerLeft);
-//        btnRight.setOnTouchListener(mOnTouchistenerRight);
-//        btnUp.setOnTouchListener(mOnTouchistenerUp);
-//        btnDown.setOnTouchListener(mOnTouchistenerDown);
-
         btnSkill.setOnTouchListener(mOnClicklistenerSk1);
 
         //開啟背景音樂
         openBackgroundMusic();
+
+        ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
+        anim.setDuration(300);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float currentValue = (float) animation.getAnimatedValue();
+                Log.e("TAG", "cuurent value is " + currentValue);
+            }
+        });
+        anim.start();
     }
-
-
-
-
-    private View.OnTouchListener mOnTouchistenerLeft = new View.OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                vdt.settLeft(true);
-                return true;
-            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                vdt.settLeft(true);
-                vdt.setIsMoveing(true);
-                return true;
-            } else if(event.getAction() == MotionEvent.ACTION_UP){
-                vdt.setIsMoveing(false);
-            }
-            return false;
-        }
-    };
-
-
-    private View.OnTouchListener mOnTouchistenerRight = new View.OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                vdt.settRight(true);
-                return true;
-            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                vdt.settRight(true);
-                vdt.setIsMoveing(true);
-                return true;
-            }else if(event.getAction() == MotionEvent.ACTION_UP){
-                vdt.setIsMoveing(false);
-            }
-            return false;
-        }
-    };
-
-
-    private View.OnTouchListener mOnTouchistenerUp = new View.OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                vdt.settUp(true);
-                return true;
-            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                vdt.settUp(true);
-                vdt.setIsMoveing(true);
-                return true;
-            }else if(event.getAction() == MotionEvent.ACTION_UP){
-                vdt.setIsMoveing(false);
-            }
-            return false;
-        }
-    };
-
-
-    private View.OnTouchListener mOnTouchistenerDown = new View.OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                vdt.settDown(true);
-                return true;
-            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                vdt.settDown(true);
-                vdt.setIsMoveing(true);
-                return true;
-            }else if(event.getAction() == MotionEvent.ACTION_UP){
-                vdt.setIsMoveing(false);
-            }
-            return false;
-        }
-    };
 
 
     private View.OnTouchListener mOnClicklistenerSk1 = new View.OnTouchListener(){
@@ -154,7 +65,6 @@ public class Activity_Surface extends AppCompatActivity {
             return false;
         }
     };
-
 
 
     /**
@@ -186,5 +96,14 @@ public class Activity_Surface extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    public void onEndOfGame() {
+        this.finish();
+    }
+
+    @Override
+    public void showResult(String result){
+        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+    }
 
 }
