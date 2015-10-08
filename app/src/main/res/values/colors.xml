@@ -8,4 +8,5 @@
     <color name="light_adobe">#FFEECA</color>
     <color name="aquamarine">#7FFFD4</color>
     <color name="darkolivegreen1">#CAFF70</color>
+    <color name="transparent">#00000000</color>
 </resources>

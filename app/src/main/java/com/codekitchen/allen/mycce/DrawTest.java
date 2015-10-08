@@ -23,6 +23,7 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
     Bitmap bp;
     int x=240,y=500;  //貼圖在螢幕上的 x,y 座標
+    int heroWidth, heroHeight;
     private Thread gameViewThread;
     private SurfaceHolder surfaceHolder;
     private Paint paint;
@@ -37,8 +38,8 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
     private boolean tUp = false;
     private boolean tDown = false;
 
-    private int heroSpeed = 10;
-    private int bossSpeed = 17;
+    private int heroSpeed = 8;
+    private int bossSpeed = 10;
 
     //是否碰撞
     boolean isCollision = false;
@@ -98,8 +99,8 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
     //方向鍵設置
     Bitmap bmcircle;
     Bitmap bncircle;
-    int mcircleX=10, mcircleY=750;
-    int ncircleX=80, ncircleY=820;
+    int mcircleX=10, mcircleY=750;//外圈(固定)
+    int ncircleX=80, ncircleY=820;//內圈(玩家操控)
     int mainX = 130, mainY = 870;//操控中心座標
 
 
@@ -146,6 +147,13 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
     }
 
     private void init(){
+
+        screen_width = getWidth();
+        screen_height = getHeight();
+        Log.e("screen_width(init)",screen_width+"");
+        Log.e("screen_height(init)",screen_height+"");
+
+
         //呼叫getHolder()方法來取得 SurfaceHolder,並指給 surfaceHolder
         surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
@@ -159,7 +167,10 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
         scorePaint.setColor(Color.RED);
         scorePaint.setTextSize(40);
 
-        bp = BitmapFactory.decodeResource(getResources(), R.drawable.btn_ball_fire);
+        bp = BitmapFactory.decodeResource(getResources(), R.drawable.hero);
+        heroWidth = bp.getWidth();
+        heroHeight = bp.getHeight();
+
         heroBold = BitmapFactory.decodeResource(getResources(), R.drawable.hero_blod);
         skill1 = BitmapFactory.decodeResource(getResources(), R.drawable.skill1);
         bossSkill1 = BitmapFactory.decodeResource(getResources(), R.drawable.boss_skill1);
@@ -256,7 +267,7 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
                 }
             }else{//靜止
                 if(bMapNumber==0){
-                    bp = BitmapFactory.decodeResource(getResources(), R.drawable.btn_ball_fire);
+                    bp = BitmapFactory.decodeResource(getResources(), R.drawable.hero);
                 }else if(bMapNumber==1){
                     bp = BitmapFactory.decodeResource(getResources(), R.drawable.btn_ball_fire_right);
                 }else if(bMapNumber==2){
@@ -272,7 +283,26 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
             //繪製主圖
             canvas.drawBitmap(boss, bossX, bossY, null);//魔王
+
+
+            if(x<0){
+                x=0;
+            }
+
+            if(x>(screen_width-heroWidth)){
+                x = screen_width-heroWidth;
+            }
+
+            if(y<0){
+                y=0;
+            }
+
+            if(y>(700-heroHeight)){
+                y = 700-heroHeight;
+            }
+
             canvas.drawBitmap(bp, x, y, null);//英雄
+
             canvas.drawBitmap(heroBold, 5, 700, null);//英雄血條
 
             //判斷是否使用技能1
@@ -389,6 +419,7 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
     }
 
 
+
     public void draw2(Canvas canvas, Paint paint){
         if(canvas!=null){
             //清除上次繪製的殘留影像
@@ -440,18 +471,78 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
         //以下計算方向鍵
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             Log.e("onTouchEvent","ACTION_DOWN");
+
+            //让矩形1随着触屏位置移动（触屏点设为此矩形的中心点）
+
+            Log.e("event.getX()",(int)event.getX()+"");
+            Log.e("event.getY()",(int)event.getY()+"");
+
+            ncircleX = (int) event.getX() - 50;
+            ncircleY = (int) event.getY() - 50;
+
+            if(ncircleX>150){
+               ncircleX = 150;
+            }
+
+            if(ncircleX<10){
+                ncircleX = 10;
+            }
+
+            if(ncircleY>890){
+                ncircleY = 890;
+            }
+
+            if(ncircleY<750){
+                ncircleY = 750;
+            }
+
+
             calMoveCoordinate(event.getX(), event.getY());
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             Log.e("onTouchEvent","ACTION_MOVE");
+
+            //让矩形1随着触屏位置移动（触屏点设为此矩形的中心点）
+
+            Log.e("event.getX()",(int)event.getX()+"");
+            Log.e("event.getY()",(int)event.getY()+"");
+
+            ncircleX = (int) event.getX() - 50;
+            ncircleY = (int) event.getY() - 50;
+
+            ncircleX = (int) event.getX() - 50;
+            ncircleY = (int) event.getY() - 50;
+
+            if(ncircleX>150){
+                ncircleX = 150;
+            }
+
+            if(ncircleX<10){
+                ncircleX = 10;
+            }
+
+            if(ncircleY>890){
+                ncircleY = 890;
+            }
+
+            if(ncircleY<750){
+                ncircleY = 750;
+            }
+
             calMoveCoordinate(event.getX(), event.getY());
             return true;
+        } else if(event.getAction() == MotionEvent.ACTION_UP){
+            Log.e("onTouchEvent","ACTION_UP");
+            //操控鈕返回中央
+            ncircleX=80;
+            ncircleY=820;
         }
 
         return false;
     }
 
 
+    //計算路徑
     public void calMoveCoordinate(float x, float y){
 
         int p = (int)x - mainX, q = (int)y - mainY;
@@ -616,11 +707,11 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         // TODO Auto-generated method stub
-
         screen_width = getWidth();
         screen_height = getHeight();
-        Log.e("screen_width",screen_width+"");
-        Log.e("screen_height",screen_height+"");
+        Log.e("screen_width(xxx)",screen_width+"");
+        Log.e("screen_height(xxx)",screen_height+"");
+
         runFlag = true;
         gameViewThread = new Thread(this);
         gameViewThread.start();
