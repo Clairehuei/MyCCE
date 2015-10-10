@@ -33,6 +33,16 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
     private Canvas canvas;
 
     //****************************英雄屬性************************************
+    int[] roho =new int[] {
+            R.drawable.hero_roho1,
+            R.drawable.hero_roho2,
+            R.drawable.hero_roho3,
+            R.drawable.hero_roho4,
+            R.drawable.hero_roho5,
+            R.drawable.hero_roho6,
+            R.drawable.hero_roho7,
+            R.drawable.hero_roho8};
+    int heroIndex = 0;
     Bitmap bp;
     int x=240,y=500;//初始座標
     int heroWidth, heroHeight;//人物 寬/高
@@ -137,7 +147,8 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
         scorePaint.setTextSize(40);
 
         //取得英雄相關圖檔
-        bp = BitmapFactory.decodeResource(resources, R.drawable.hero);
+//        bp = BitmapFactory.decodeResource(resources, R.drawable.hero);
+        bp = BitmapFactory.decodeResource(resources, R.drawable.hero_roho1);
         heroWidth = bp.getWidth();
         heroHeight = bp.getHeight();
         skill1 = BitmapFactory.decodeResource(resources, R.drawable.skill1);
@@ -207,7 +218,10 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
             canvas.drawBitmap(boss, bossX, bossY, null);//繪製魔王
 
             updateHeroCoordinate();//調整英雄座標(避免出畫面)
+
+            bp = BitmapFactory.decodeResource(resources, roho[heroIndex]);
             canvas.drawBitmap(bp, x, y, null);//繪製英雄
+
             canvas.drawBitmap(heroBold, 5, 700, null);//英雄血條
 
             //判斷英雄是否使用技能1
@@ -323,7 +337,7 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
 
 
     /**
-     * 触屏事件监听
+     * 觸控事件監聽
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -410,25 +424,34 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
         int p = (int)x - mainX, q = (int)y - mainY;
         int moveX, moveY;
 
+        int dx = 10;//垂直誤差值範圍
+        int dy = 10;//水平誤差值範圍
+
         //垂直上下移動
-        if(p==0){
-            if(q<0){
+        if(-dx<=p && p<=dx){
+            if(q<0){//向上
                 moveY = -heroSpeed;
-            }else {
+                heroIndex = 0;
+            }else {//向下
                 moveY = heroSpeed;
+                heroIndex = 4;
             }
             this.y = this.y + moveY;
+
             return;
         }
 
         //水平左右移動
-        if(q==0){
-            if(p<0){
+        if(-dy<=q && q<=dy){
+            if(p<0){//向左
                 moveX = -heroSpeed;
-            }else {
+                heroIndex = 6;
+            }else {//向右
                 moveX = heroSpeed;
+                heroIndex = 2;
             }
             this.x = this.x + moveX;
+
             return;
         }
 
@@ -441,8 +464,22 @@ public class DrawTest extends SurfaceView implements Runnable ,SurfaceHolder.Cal
             moveY = -moveY;
         }
 
+        if(p>=0 && q<0){//向右上
+            heroIndex = 1;
+        }else if(p>=0 && q>=0){//向右下
+            heroIndex = 3;
+        }else if(p<0 && q>=0){//向左下
+            heroIndex = 5;
+        }else if(p<0 && q<0){//向左上
+            heroIndex = 7;
+        }else {
+            heroIndex = 0;
+        }
+
+
         this.x = this.x + moveX;
         this.y = this.y + moveY;
+
     }
 
 
