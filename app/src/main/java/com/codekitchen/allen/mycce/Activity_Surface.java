@@ -34,17 +34,6 @@ public class Activity_Surface extends AppCompatActivity implements IOnEndOfGameI
 
         //開啟背景音樂
         openBackgroundMusic();
-
-        ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
-        anim.setDuration(300);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float currentValue = (float) animation.getAnimatedValue();
-                Log.e("TAG", "cuurent value is " + currentValue);
-            }
-        });
-        anim.start();
     }
 
 
